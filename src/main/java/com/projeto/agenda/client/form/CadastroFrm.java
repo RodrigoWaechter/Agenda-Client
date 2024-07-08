@@ -1,12 +1,14 @@
 package com.projeto.agenda.client.form;
 
-
+import com.projeto.agenda.client.custom.BaseForm;
 
 import javax.swing.*;
 import java.awt.*;
 
 
-public class CadastroFrm extends JFrame{
+public class CadastroFrm extends BaseForm {
+
+
     private static void createAndShowGUI() {
         JFrame frame = new JFrame("Cadastro");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -17,13 +19,16 @@ public class CadastroFrm extends JFrame{
         setSize(300,400);
         setTitle("Cadastro");
 
-        JPanel panel = new JPanel();
+    }
 
-        JTextField email = new JTextField("Email:");
-        panel.add(email);
-
-
+    @Override
+    protected void createComponents() {
 
 
+    }
+
+    @Override
+    protected JComponent createMainPanel() {
+        return null;
     }
 }
