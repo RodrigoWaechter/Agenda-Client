@@ -1,80 +1,72 @@
 package com.projeto.agenda.client.form;
 
-import com.jgoodies.forms.builder.DefaultFormBuilder;
-import com.jgoodies.forms.debug.FormDebugPanel;
+import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.RowSpec;
+import com.projeto.agenda.client.custom.BaseForm;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+public class LoginFrm extends BaseForm {
+    JTextField txtNome;
+    JPasswordField txtSenha;
+    JButton btnLogin;
+    JButton btnCadastro;
 
-public class LoginFrm extends JFrame {
     public LoginFrm() {
-        JPanel panel = new JPanel();
+        setTitle("Login");
+        setSize(300, 400);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        startup();
 
-        setSize(600, 600);
-        getContentPane().add(panel);
-        setVisible(true);
-
-
-        DefaultFormBuilder x = new DefaultFormBuilder(new FormLayout("pref, 100dlu"), new FormDebugPanel());
-
-
-        x.appendRow(RowSpec.decode("18dlu"));
-        x.append(new JTextField(""));
-        x.append(new JLabel("Entrar:"));
+    }
 
 
-
-
-        panel.add(x.getPanel());
-
-
-
-        /*JLabel senha = new JLabel("Senha:");
-        panel.add(senha);
-
-        JPasswordField password = new JPasswordField(20);
-        panel.add(password);
-
-        JButton button = new JButton("Login");
-        panel.add(button);
-
-        JButton button_sign_up = new JButton("Cadastro");
-        panel.add(button_sign_up);
-
-        /*button.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String email = login.getText();
-                String senha = password.getText();
-                if(email.length() > 0 && senha.length() > 0) {
-                    JOptionPane.showMessageDialog(null, "Login: " + login.getText() + "\nSenha: " + password.getText());
-
-                }
-                else{
-                    JOptionPane.showMessageDialog(null, "Dados inválidos.");
-                }
-            }
-        });
-        button_sign_up.addActionListener(new ActionListener() {
+    @Override
+    protected void createComponents() {
+        txtNome = createConfiguredTextField(20);
+        txtSenha = createConfiguredPasswordField(20);
+        btnCadastro = createConfiguredButton("Cadastro", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 CadastroFrm telaCadastro = new CadastroFrm();
                 telaCadastro.setVisible(true);
                 setVisible(false);
             }
-        });*/
+        });
+        btnLogin = createConfiguredButton("Login", new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
 
     }
 
-    private static void createAndShowGUI() {
-        JFrame frame = new JFrame("Login");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    @Override
+    protected JComponent createMainPanel() {
+        FormLayout layout = new FormLayout("pref, 5px, 100dlu:grow", " pref, 5px , pref, 5px, pref, 5px, pref");
+        FormBuilder builder = FormBuilder.create().debug(true).layout(layout).padding("5px,5px,5px,5px");
 
+        builder.add(createConfiguredLabel("Login:")).xy(1,1);
+        builder.add(txtNome).xy(3,1);
+
+        builder.add(createConfiguredLabel("Senha:")).xy(1,3);
+        builder.add(txtSenha).xy(3,3);
+
+        builder.add(btnLogin).xy(3,5);
+
+        builder.add(btnCadastro).xy(3,7);
+
+
+        return builder.build();
     }
-
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new LoginFrm());
+        LoginFrm tela = new LoginFrm();
+        tela.setVisible(true);
     }
 }
+
