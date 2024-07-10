@@ -13,8 +13,8 @@ public abstract class BaseForm extends JFrame {
     protected JLabel createConfiguredLabel(String nomeLabel) {
         JLabel label = new JLabel(nomeLabel);
         label.setFont(new Font("Arial", Font.PLAIN, 20));
-        label.setForeground(Color.BLACK);
-        label.setBackground(Color.WHITE);
+        label.setForeground(Color.white);
+        label.setBackground(Color.pink);
         return label;
     }
 
@@ -39,17 +39,18 @@ public abstract class BaseForm extends JFrame {
         JButton botao = new JButton(nomeBotao);
         botao.setFont(new Font("Arial", Font.PLAIN, 20));
         botao.setPreferredSize(new Dimension(100, 50));
-        botao.setBorder(new RoundedBorder(Color.green, 5));
+        botao.setBorder(new RoundedBorder(Color.BLACK, 5));
         botao.setFocusable(false);
-        botao.setBackground(Color.black);
-        botao.setForeground(Color.GREEN);
-        botao.setForeground(Color.GREEN);
+        botao.setBackground(Color.WHITE);
+        botao.setForeground(Color.BLACK);
         botao.addActionListener(actionListener);
         return botao;
     }
+
     protected void startup() {
         createComponents();
         getContentPane().add(createMainPanel());
+        getContentPane().setBackground(Color.darkGray);
     }
 
     protected abstract void createComponents();
