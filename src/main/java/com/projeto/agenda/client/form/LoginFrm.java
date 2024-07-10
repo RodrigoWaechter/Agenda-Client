@@ -5,6 +5,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import com.projeto.agenda.client.custom.BaseForm;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -20,6 +21,7 @@ public class LoginFrm extends BaseForm {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         startup();
+
 
     }
 
@@ -39,6 +41,17 @@ public class LoginFrm extends BaseForm {
         btnLogin = createConfiguredButton("Login", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                AtendimentoFrm telaInicial = new AtendimentoFrm();
+                telaInicial.setVisible(true);
+                setVisible(false);
+                /*if(txtNome.getText().length() > 0 && txtSenha.getText().length() >= 8){
+                    AtendimentoFrm telaInicial = new AtendimentoFrm();
+                    telaInicial.setVisible(true);
+                    setVisible(false);
+                }
+                else{
+
+                }*/
 
             }
         });
