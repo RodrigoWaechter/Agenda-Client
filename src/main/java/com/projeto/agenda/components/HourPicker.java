@@ -1,4 +1,4 @@
-package com.projeto.agenda.client.custom;
+package com.projeto.agenda.components;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,7 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import com.projeto.agenda.client.custom.RoundedBorder;
+import com.projeto.agenda.components.RoundedBorder;
 
 public class HourPicker extends JPanel {
 	private static final long serialVersionUID = 1L;
