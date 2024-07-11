@@ -1,4 +1,4 @@
-package com.projeto.agenda.client.custom;
+package com.projeto.agenda.components;
 
 import java.awt.Color;
 import java.awt.Component;
