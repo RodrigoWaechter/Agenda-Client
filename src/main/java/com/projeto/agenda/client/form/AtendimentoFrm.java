@@ -13,6 +13,7 @@ import java.util.List;
 
 public class AtendimentoFrm extends BaseForm {
     List<String> listaServicos;
+    JComboBox<String> cmbPesquisa;
     JButton btnConfig;
     JTextField txtPesquisa;
     JButton btnPesquisa;
@@ -20,7 +21,7 @@ public class AtendimentoFrm extends BaseForm {
     JButton btnNovo;
     JButton btnEditar;
     JButton btnApagar;
-    JComboBox<String> cmbPesquisa;
+
 
 
     public AtendimentoFrm() {
@@ -101,7 +102,7 @@ public class AtendimentoFrm extends BaseForm {
         panelCabecalho.setBackground(Color.LIGHT_GRAY);
 
         JPanel panelBaixo = new JPanel(new FlowLayout(FlowLayout.LEFT, 50, 10));
-        panelBaixo.setBackground(Color.black);
+        panelBaixo.setBackground(Color.LIGHT_GRAY);
 
         btnConfig.setFont(new Font("Arial",Font.PLAIN, 10));
         btnConfig.setSize(new Dimension(5,10));
