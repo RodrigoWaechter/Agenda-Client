@@ -1,58 +1,73 @@
 package com.projeto.agenda.client.form;
 
+import java.awt.Dimension;
+
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
-import com.projeto.agenda.client.custom.BaseForm;
+import com.projeto.agenda.components.BaseForm;
+import com.projeto.agenda.components.HourPicker;
+import com.projeto.agenda.server.domain.Atendimento;
 import com.toedter.calendar.JDateChooser;
 
-import javax.swing.*;
-import java.util.ArrayList;
-import java.util.List;
-
-public class NovoFrm extends BaseForm {
-    JDateChooser dtNovo;
+public class NovoFrm extends BaseForm<Atendimento> {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	JDateChooser dtNovo;
     JTextField txtNome;
-    List<String> metodoPagamento;
-    JComboBox<String> cmbMetodo;
+    private HourPicker horaInicio;
+    private HourPicker horaFim;
 
 
     public NovoFrm() {
-        setTitle("Novo atendimento");
-        setSize(463, 600);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
-        startup();
+
     }
 
     @Override
     protected void createComponents() {
+    	
+    	txtNome = new JTextField("");
+    	horaInicio = new HourPicker();
+    	horaFim = new HourPicker();
+    	
+    	horaInicio.setPreferredSize(new Dimension(215,75));
+    	horaFim.setPreferredSize(new Dimension(215,75));
+    	
         dtNovo = new JDateChooser();
         dtNovo.setDateFormatString("dd/MM/yyyy");
-        txtNome = createConfiguredTextField(20);
-        metodoPagamento = new ArrayList<>();
-        metodoPagamento.add("Dinheiro");
-        metodoPagamento.add("PIX");
-        metodoPagamento.add("Cartão de Débito");
-        metodoPagamento.add("Cartão de Crédito");
-        cmbMetodo = new JComboBox<>(metodoPagamento.toArray(new String[0]));
-
+        
+     
     }
+        
 
     @Override
-    protected JComponent createMainPanel() {
-        FormLayout layout = new FormLayout("pref, 100dlu:grow", " pref ,5px, pref, 5px, pref, 5px, pref");
+    protected JPanel createMainPanel() {
+        FormLayout layout = new FormLayout("pref, 5px, 100dlu:grow", " pref ,5px, pref, 5px, pref, 5px, pref, 5px, pref, 5px, pref");
         FormBuilder builder = FormBuilder.create().debug(true).layout(layout);
+        
+        
+        builder.addLabel("Cliente:").xy(1,1);
+        builder.add(txtNome).xy(3,1);
+        
+        builder.addLabel("Data consulta:").xy(1,3);
+        builder.add(dtNovo).xy(3,3);
 
-        builder.add(createConfiguredLabel("Data consulta:")).xy(1,1);
-        builder.add(dtNovo).xy(2,1);
-
-        builder.add(createConfiguredLabel("Nome do cliente:")).xy(1,3);
-        builder.add(txtNome).xy(2,3);
-
-        builder.add(createConfiguredLabel("Método de pagamento:")).xy(1,5);
-        builder.add(cmbMetodo).xy(2,5);
+        builder.addLabel("Hora Inicio:").xy(1,5);
+        builder.add(horaInicio).xy(3, 5);
+        
+        builder.addLabel("Hora Fim:").xy(1,7);
+        builder.add(horaFim).xy(3, 7);
 
 
         return builder.build();
+    }
+
+    @Override
+    protected String getPanelName() {
+        return "Novo";
     }
 }

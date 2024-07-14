@@ -1,7 +1,10 @@
-package ziparProKelvin;
+package com.projeto.agenda.client.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
+import com.projeto.agenda.components.InterfaceCRUD;
+import com.projeto.agenda.server.service.AtendimentoService;
 
 @Controller
 public class AtendimentoController implements InterfaceCRUD {

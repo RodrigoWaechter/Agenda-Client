@@ -2,7 +2,7 @@ package com.projeto.agenda.client.form;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
-import com.projeto.agenda.client.custom.BaseForm;
+import com.projeto.agenda.components.BaseForm;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,17 +20,14 @@ public class ApagarFrm extends BaseForm {
 
 
     public ApagarFrm() {
-        setTitle("Cancelar atendimento");
         setSize(463, 600);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
         startup();
     }
 
     @Override
     protected void createComponents() {
-        txtPesquisa = createConfiguredTextField(8);
-        btnPesquisa = createConfiguredButton("Pesquisar", new ActionListener() {
+        txtPesquisa = new JTextField(8);
+        btnPesquisa = new JButton("Pesquisar", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -68,5 +65,10 @@ public class ApagarFrm extends BaseForm {
         builder.add(tabelaResultado).xy(1,3);
 
         return builder.build();
+    }
+
+    @Override
+    protected String getPanelName() {
+        return "Apagar";
     }
 }

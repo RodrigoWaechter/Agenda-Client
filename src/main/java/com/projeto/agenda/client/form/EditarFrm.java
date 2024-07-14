@@ -1,19 +1,29 @@
 package com.projeto.agenda.client.form;
 
-import com.jgoodies.forms.builder.FormBuilder;
-import com.jgoodies.forms.layout.FormLayout;
-import com.projeto.agenda.client.custom.BaseForm;
-import com.toedter.calendar.JDateChooser;
-
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.Color;
+import java.awt.Font;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditarFrm extends BaseForm {
-    List<String> listaServicos;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+
+import com.jgoodies.forms.builder.FormBuilder;
+import com.jgoodies.forms.layout.FormLayout;
+import com.projeto.agenda.components.BaseForm;
+import com.projeto.agenda.server.domain.Atendimento;
+import com.toedter.calendar.JDateChooser;
+
+public class EditarFrm extends BaseForm<Atendimento> {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	List<String> listaServicos;
     JComboBox<String> cmbPesquisa;
     JTextField txtPesquisa;
     JButton btnPesquisa;
@@ -25,27 +35,14 @@ public class EditarFrm extends BaseForm {
     JComboBox<String> cmbMetodo;
 
     public EditarFrm() {
-        setTitle("Editar atendimento");
-        setSize(463, 600);
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setLocationRelativeTo(null);
+        
         startup();
     }
 
     @Override
     protected void createComponents() {
-        txtPesquisa = createConfiguredTextField(8);
-        btnPesquisa = createConfiguredButton("Pesquisar", new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-        listaServicos = new ArrayList<>();
-        listaServicos.add("Dia");
-        listaServicos.add("Nome");
-        cmbPesquisa = new JComboBox<>(listaServicos.toArray(new String[0]));
-
+        
+    	txtNome = new JTextField("Nome");
         tabelaResultado = new JTable();
         tabelaResultado.setFont(new Font("Arial", Font.PLAIN,15));
         tabelaResultado.setBackground(Color.LIGHT_GRAY);
@@ -57,7 +54,7 @@ public class EditarFrm extends BaseForm {
 
         dtNovo = new JDateChooser();
         dtNovo.setDateFormatString("dd/MM/yyyy");
-        txtNome = createConfiguredTextField(20);
+
         metodoPagamento = new ArrayList<>();
         metodoPagamento.add("Dinheiro");
         metodoPagamento.add("PIX");
@@ -68,36 +65,32 @@ public class EditarFrm extends BaseForm {
     }
 
     @Override
-    protected JComponent createMainPanel() {
+    protected JPanel createMainPanel() {
         FormLayout layout = new FormLayout("pref, 100dlu:grow", " pref , 5px, pref, 5px, pref, pref, pref, pref, pref");
         FormBuilder builder = FormBuilder.create().debug(true).layout(layout);
 
         FormLayout layout2 = new FormLayout("pref, 100dlu:grow", " pref , pref, pref, pref, pref, pref, pref");
         FormBuilder rodaPe = FormBuilder.create().debug(true).layout(layout2);
 
-        JPanel panelCabecalho = new JPanel(new FlowLayout(FlowLayout.LEADING));
-        panelCabecalho.setBackground(Color.LIGHT_GRAY);
 
-
-        panelCabecalho.add(createConfiguredLabel("Pesquisar por:"));
-        panelCabecalho.add(cmbPesquisa);
-        panelCabecalho.add(txtPesquisa);
-        panelCabecalho.add(btnPesquisa);
-        builder.add(panelCabecalho).xy(1,1);
-        builder.add(tabelaResultado).xy(1,3);
+        builder.add(tabelaResultado).xy(1,1);
 
         
-
-        rodaPe.add(createConfiguredLabel("Nova data:")).xy(1,1);
+        rodaPe.addLabel("Nova data:").xy(1,1);
         rodaPe.add(dtNovo).xy(2,1);
 
-        rodaPe.add(createConfiguredLabel("Editar nome:")).xy(1,3);
+        rodaPe.addLabel("Editar nome:").xy(1,3);
         rodaPe.add(txtNome).xy(2,3);
 
-        rodaPe.add(createConfiguredLabel("Editar método:")).xy(1,5);
+        rodaPe.addLabel("Editar método:").xy(1,5);
         rodaPe.add(cmbMetodo).xy(2,5);
 
 
         return builder.build();
+    }
+
+    @Override
+    protected String getPanelName() {
+        return "Editar";
     }
 }

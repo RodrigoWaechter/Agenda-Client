@@ -2,7 +2,7 @@ package com.projeto.agenda.client.form;
 
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
-import com.projeto.agenda.client.custom.BaseForm;
+import com.projeto.agenda.components.BaseForm;
 
 import javax.swing.*;
 import java.awt.*;
@@ -28,20 +28,18 @@ public class CadastroFrm extends BaseForm {
 
     public CadastroFrm() throws HeadlessException {
         setSize(400,500);
-        setTitle("Cadastro");
-        setLocationRelativeTo(null);
         startup();
     }
 
-    @Override
+
     protected void createComponents() {
-        txtNomeEmpresario = createConfiguredTextField(20);
-        txtNomeEmpresa = createConfiguredTextField(20);
-        txtCNPJ = createConfiguredTextField(20);
-        txtEmail = createConfiguredTextField(20);
-        txtSenha = createConfiguredPasswordField(20);
-        txtConfirmSenha = createConfiguredPasswordField(20);
-        btnCadastro = createConfiguredButton("Cadastrar", new ActionListener() {
+        txtNomeEmpresario = new JTextField(20);
+        txtNomeEmpresa = new JTextField(20);
+        txtCNPJ = new JTextField(20);
+        txtEmail = new JTextField(20);
+        txtSenha = new JTextField(20);
+        txtConfirmSenha = new JTextField(20);
+        btnCadastro = new JButton("Cadastrar", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
 
@@ -80,5 +78,10 @@ public class CadastroFrm extends BaseForm {
 
         return builder.build();
 
+    }
+
+    @Override
+    protected String getPanelName() {
+        return "Cadastro";
     }
 }

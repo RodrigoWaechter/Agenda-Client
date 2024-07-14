@@ -6,6 +6,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JLabel;
@@ -100,6 +101,23 @@ public class ComponentFactoryAgenda {
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setDateFormatString(formatter);
 		return dateChooser;
+	}
+
+	public static <E extends Enum<E>> JComboBox<E> enumComboBox(ValueModel model, Class<E> enumClass) {
+		JComboBox<E> comboBox = new JComboBox<>(enumClass.getEnumConstants());
+
+		comboBox.setSelectedItem(model.getValue());
+
+		model.addValueChangeListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent evt) {
+				comboBox.setSelectedItem(evt.getNewValue());
+			}
+		});
+
+		comboBox.addActionListener(e -> model.setValue(comboBox.getSelectedItem()));
+
+		return comboBox;
 	}
 
 	private static JFormattedTextField createFormattedField(ValueModel valueModel, boolean enabled,

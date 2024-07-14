@@ -1,4 +1,4 @@
-package com.projeto.agenda.server.components;
+package com.projeto.agenda.components;
 
 public interface InterfaceCRUD {
 
