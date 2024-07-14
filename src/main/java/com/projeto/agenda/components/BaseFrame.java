@@ -1,38 +1,38 @@
 package com.projeto.agenda.components;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-
 import com.jgoodies.binding.PresentationModel;
-import com.jgoodies.binding.list.SelectionInList;
 import com.jgoodies.binding.value.ValueModel;
 
-public abstract class BaseForm<T> extends JPanel {
+public abstract class BaseFrame<T> extends JFrame {
     private static final long serialVersionUID = 1L;
     
     private PresentationModel<T> model;
 
-    public BaseForm() {
+    public BaseFrame() {
         this.model = new PresentationModel<>();
+        setTitle(getFrameTitle());
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         startup();
     }
 
     protected void startup() {
         createComponents();
         add(createMainPanel());
+        pack();
+        setLocationRelativeTo(null); 
     }
 
     protected abstract void createComponents();
 
     protected abstract JPanel createMainPanel();
 
-    protected abstract String getPanelName();
+    protected abstract String getFrameTitle();
 
     protected ValueModel getModel(String propertyName) {
         return model.getModel(propertyName);
     }
-    
-	public abstract JTable createQueryTable(SelectionInList<T> queryResult); 
 
     protected T getBean() {
         return model.getBean();

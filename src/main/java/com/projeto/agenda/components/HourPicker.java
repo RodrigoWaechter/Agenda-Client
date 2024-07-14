@@ -63,7 +63,6 @@ public class HourPicker extends JPanel {
 		panelTopo.add(botaoSalvar);
 		contentPane.add(panelTopo, BorderLayout.NORTH);
 
-		//campoTexto.setBorder(new LineBorder(Color.GRAY));
 		campoTexto.setBorder(null);
 		campoTexto.setPreferredSize(new Dimension(100, 30));
 		campoTexto.setHorizontalAlignment(JTextField.CENTER);
@@ -115,10 +114,12 @@ public class HourPicker extends JPanel {
 
 	}
 
-	public String getCampoTexto() {
+	public JTextField getCampoTexto() {
+		return campoTexto;
+	}
+	public String getText() {
 		return campoTexto.getText();
 	}
-
 	private void addFuncionalidadeBotoes(JButton botao, boolean aumentar, boolean isHora, int valor) {
 		botao.addActionListener(new ActionListener() {
 			@Override
@@ -173,16 +174,10 @@ public class HourPicker extends JPanel {
 		botao.setPreferredSize(new Dimension(40, 20));
 		botao.setFont(new Font("Arial", Font.PLAIN, 12));
 		botao.setBorder(new RoundedBorder(Color.black, 5));
-		//botao.setBorder(new LineBorder(Color.lightGray));
 		botao.setForeground(Color.black);
 		botao.setBackground(Color.white);
 		botao.setFocusable(false);
 		return botao;
 	}
-	/*
-	 * public static void main(String[] args) { SwingUtilities.invokeLater(() -> {
-	 * JFrame frame = new JFrame("Hour Picker");
-	 * frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); frame.setSize(300,
-	 * 200); frame.add(new HourPicker()); frame.setVisible(true); }); }
-	 */
+	
 }
