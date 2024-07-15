@@ -36,7 +36,7 @@ public class EditarFrm extends BaseForm<Atendimento> {
 
     public EditarFrm() {
         
-        startup();
+        
     }
 
     @Override
