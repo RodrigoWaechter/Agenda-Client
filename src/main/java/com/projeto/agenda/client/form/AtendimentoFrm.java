@@ -107,6 +107,7 @@ public class AtendimentoFrm extends BaseForm<Atendimento> {
         return panel;
     }
 
+
     private ActionListener actionAdicionar() {
         return new ActionListener() {
             @Override
@@ -171,8 +172,11 @@ public class AtendimentoFrm extends BaseForm<Atendimento> {
         btnAdicionar.setEnabled(true);
     }
 
-    @Override
-    protected String getPanelName() {
-        return "Atendimento";
-    }
+	
+
+	@Override
+	// Define o nome do painel
+	protected String getPanelName() {
+		return "Atendimento";
+	}
 }
