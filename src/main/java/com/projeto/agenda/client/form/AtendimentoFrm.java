@@ -32,8 +32,6 @@ public class AtendimentoFrm extends BaseForm<Atendimento> {
 	private JButton btnEditar;
 	private JButton btnExcluir;
 
-
-
 	@Override
 	// Função para criar os componentes da interface
 	protected void createComponents() {
@@ -66,7 +64,7 @@ public class AtendimentoFrm extends BaseForm<Atendimento> {
 		FormLayout layout = new FormLayout(
 				"pref, 5px, 100dlu:grow, 5px, pref, 5px, 100dlu:grow, 5px, pref, 5px, 100dlu:grow, 5px, pref, 5px, 100dlu:grow",
 				"pref, 5px, pref, 5px, pref");
-		FormBuilder builder = FormBuilder.create().debug(true).layout(layout);
+		FormBuilder builder = FormBuilder.create().layout(layout);
 
 		builder.addLabel("Cliente:").xy(1, 1);
 		builder.add(txtNome).xy(3, 1);
@@ -127,7 +125,7 @@ public class AtendimentoFrm extends BaseForm<Atendimento> {
 	}
 
 	@Override
-	//Define o nome do painel
+	// Define o nome do painel
 	protected String getPanelName() {
 		return "Atendimento";
 	}

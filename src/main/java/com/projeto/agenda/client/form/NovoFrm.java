@@ -32,7 +32,6 @@ public class NovoFrm extends BaseForm<Atendimento> {
 	private JButton btnEditar;
 	private JButton btnExcluir;
 
-
 	@Override
 	// Função para criar os componentes da interface
 	protected void createComponents() {
@@ -63,7 +62,7 @@ public class NovoFrm extends BaseForm<Atendimento> {
 		FormLayout layout = new FormLayout(
 				"pref, 9px, 100dlu:grow, 9px, pref, 9px, 100dlu:grow, 9px, pref, 9px, 100dlu:grow, 9px, pref, 10px, 100dlu:grow",
 				" pref ,5px, pref, 5px, pref");
-		FormBuilder builder = FormBuilder.create().debug(true).layout(layout);
+		FormBuilder builder = FormBuilder.create().layout(layout);
 
 		builder.addLabel("Nome:").xy(1, 1);
 		builder.add(txtNomeCliente).xy(3, 1);
@@ -99,6 +98,7 @@ public class NovoFrm extends BaseForm<Atendimento> {
 			public void actionPerformed(ActionEvent e) {
 				if (txtNomeCliente.getText().isEmpty() || txtcpfCliente.getText().isEmpty()
 						|| txttelefoneCliente.getText().isEmpty()) {
+					System.out.println("Valores Invalidos");
 					return;
 				} else {
 
