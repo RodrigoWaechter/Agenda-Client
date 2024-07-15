@@ -1,17 +1,23 @@
 package com.projeto.agenda.client.form;
 
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
 import com.jgoodies.forms.builder.FormBuilder;
 import com.jgoodies.forms.layout.FormLayout;
 import com.projeto.agenda.components.BaseForm;
 import com.projeto.agenda.components.ComponentFactoryAgenda;
+import com.projeto.agenda.server.domain.Atendimento;
 
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-public class LoginFrm extends BaseForm {
-    JTextField txtNome;
+public class LoginFrm extends BaseForm<Atendimento> {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	JTextField txtNome;
     JPasswordField txtSenha;
     JButton btnLogin;
     JButton btnCadastro;

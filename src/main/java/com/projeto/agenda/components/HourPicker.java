@@ -61,7 +61,7 @@ public class HourPicker extends JPanel {
 		});
 		panelTopo.add(botaoSalvar);
 		contentPane.add(panelTopo, BorderLayout.NORTH);
-
+		campoTexto.setText("00:00");
 		//campoTexto.setBorder(new LineBorder(Color.GRAY));
 		campoTexto.setBorder(null);
 		campoTexto.setPreferredSize(new Dimension(100, 30));
@@ -110,11 +110,14 @@ public class HourPicker extends JPanel {
 		SimpleDateFormat format = new SimpleDateFormat("HH:mm");
 		Date horaAtual = calendario.getTime();
 		campoTexto.setText(format.format(horaAtual));
-		getCampoTexto();
+		getText();
 
 	}
 
-	public String getCampoTexto() {
+	public JTextField getCampoTexto() {
+		return campoTexto;
+	}
+	public String getText() {
 		return campoTexto.getText();
 	}
 

@@ -9,7 +9,7 @@ public class mainFrm extends JFrame {
     public mainFrm() {
         setTitle("Aplicação com Abas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(800, 600);
+        
         setLocationRelativeTo(null);
         
         AtendimentoFrm tela = new AtendimentoFrm();
@@ -23,6 +23,7 @@ public class mainFrm extends JFrame {
         pane.addTab(editar.getPanelName(), editar);
         
         getContentPane().add(pane);
+        pack();
         
         
         
