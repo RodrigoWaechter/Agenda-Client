@@ -173,11 +173,11 @@ public class HourPickerField extends JPanel {
         return botao;
     }
 
-    public String getSelectedTime() {
+    public String getTime() {
         return textField.getText();
     }
 
-    public void setSelectedTime(String tempo) {
+    public void setTime(String tempo) {
         try {
             Date date = timeFormat.parse(tempo);
             calendario.setTime(date);
