@@ -9,18 +9,18 @@ public class mainFrm extends JFrame {
     public mainFrm() {
         setTitle("Aplicação com Abas");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        setLocationRelativeTo(null);
+        setResizable(false);
+        setLocation(0,0);
         
         AtendimentoFrm tela = new AtendimentoFrm();
         NovoFrm novo = new NovoFrm();
-        EditarFrm editar = new EditarFrm();
+        //EditarFrm editar = new EditarFrm();
         
         
         JTabbedPane pane = new JTabbedPane();
         pane.addTab(tela.getPanelName(), tela);
         pane.addTab(novo.getPanelName(), novo);
-        pane.addTab(editar.getPanelName(), editar);
+        //pane.addTab(editar.getPanelName(), editar);
         
         getContentPane().add(pane);
         pack();

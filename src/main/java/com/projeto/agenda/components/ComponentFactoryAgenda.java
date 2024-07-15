@@ -7,16 +7,13 @@ import java.beans.PropertyChangeListener;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
 
+import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFormattedTextField.AbstractFormatter;
 import javax.swing.JPasswordField;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
-import javax.swing.table.TableModel;
 import javax.swing.text.NumberFormatter;
 
 import com.jgoodies.binding.adapter.Bindings;
@@ -37,6 +34,9 @@ public class ComponentFactoryAgenda {
 
 	public static JFormattedTextField textField(ValueModel valueModel) {
 		return createFormattedField(valueModel, true, null);
+	}
+	public static JButton button(String nome) {
+		return createButton(true, nome);
 	}
 
 	public static JPasswordField passwordField(ValueModel valueModel) {
@@ -127,6 +127,15 @@ public class ComponentFactoryAgenda {
 		Bindings.bind(field, valueModel);
 		return field;
 	}
+	private static JButton createButton(boolean enabled, String nome) {
+		JButton button = new JButton(nome);
+		button.setEnabled(enabled);
+		button.setHorizontalAlignment(JButton.CENTER);
+		button.setBorder(new RoundedBorder(Color.LIGHT_GRAY, 5));
+		button.setPreferredSize(new Dimension(150, 40));
+		return button;
+		
+	}
 
 	private static JPasswordField createPasswordField(ValueModel valueModel, boolean enabled) {
 		final JPasswordField passwordField = new JPasswordField();
@@ -153,20 +162,18 @@ public class ComponentFactoryAgenda {
 		Bindings.bind(formattedField, valueModel);
 		return formattedField;
 	}
-	public static HourPicker hourPickerField(ValueModel model) {
+	public static HourPickerField hourPickerField(ValueModel model) {
 		return hourPickerField(model, "00:00");
 	}
-	public static HourPicker hourPickerField(ValueModel model, String setTime) {
+	public static HourPickerField hourPickerField(ValueModel model, String setTime) {
 		return createHourPicker(model, setTime, true);
 	}
 	
-	private static HourPicker createHourPicker(ValueModel model, String setTime, boolean enabled) {
-		HourPicker hp = new HourPicker();
+	private static HourPickerField createHourPicker(ValueModel model, String setTime, boolean enabled) {
+		HourPickerField hp = new HourPickerField();
 		hp.setSelectedTime(setTime);
 		hp.setEnabled(enabled);
-		hp.setPreferredSize(new Dimension(215,75));
-		hp.setBorder(new RoundedBorder(Color.BLACK, 5));
-		Bindings.bind(hp.getCampoTexto(), model);
+		//Bindings.bind(hp.getCampoTexto(), model);
 		return hp;
 	}
 }
