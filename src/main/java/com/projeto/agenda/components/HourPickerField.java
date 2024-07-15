@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.ParseException;
@@ -26,6 +27,8 @@ public class HourPickerField extends JPanel {
     private Calendar calendario = Calendar.getInstance();
     private Calendar calendarioInicial = Calendar.getInstance();
     private JPopupMenu popupMenu; 
+   
+    
 
     public HourPickerField() {
         setLayout(new BorderLayout());
@@ -33,7 +36,7 @@ public class HourPickerField extends JPanel {
         textField = new JTextField(5);
         textField.setEditable(false);
         button = new JButton("...");
-
+        button.setPreferredSize(new Dimension(20,15));
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

@@ -47,7 +47,7 @@ public class AtendimentoFrm extends BaseForm<Atendimento> {
 
         tabelaServicos = new JTable(new AtendimentoTableModel());
 		tabelaServicos.setFont(new Font("Arial", Font.PLAIN, 15));
-		tabelaServicos.setBackground(Color.LIGHT_GRAY);
+		tabelaServicos.setBackground(Color.black);
 		tabelaServicos.setRowHeight(35);
 		tabelaServicos.setDefaultEditor(Object.class, null);
 		tabelaServicos.setColumnSelectionAllowed(false);
