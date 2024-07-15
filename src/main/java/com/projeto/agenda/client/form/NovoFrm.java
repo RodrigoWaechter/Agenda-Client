@@ -22,101 +22,109 @@ import com.projeto.agenda.server.domain.Atendimento;
 import com.toedter.calendar.JDateChooser;
 
 public class NovoFrm extends BaseForm<Atendimento> {
-    private static final long serialVersionUID = 1L;
-    private JTextField txtNomeCliente;
-    private JDateChooser dataNascimentoCliente;
-    private JTextField txtcpfCliente;
-    private JTextField txttelefoneCliente;
-    private JTable tabelaServicos;
-    private JButton btnAdicionar;
-    private JButton btnEditar;
-    private JButton btnExcluir;
+	private static final long serialVersionUID = 1L;
+	private JTextField txtNomeCliente;
+	private JDateChooser dataNascimentoCliente;
+	private JTextField txtcpfCliente;
+	private JTextField txttelefoneCliente;
+	private JTable tabelaServicos;
+	private JButton btnAdicionar;
+	private JButton btnEditar;
+	private JButton btnExcluir;
 
-    public NovoFrm() {
 
-    }
+	@Override
+	// Função para criar os componentes da interface
+	protected void createComponents() {
+		txtNomeCliente = ComponentFactoryAgenda.textField(getModel("cliente"));
+		dataNascimentoCliente = ComponentFactoryAgenda.dateField(getModel("datanascimento"));
+		txtcpfCliente = ComponentFactoryAgenda.textField(getModel("cpf"));
+		txttelefoneCliente = ComponentFactoryAgenda.textField(getModel("telefone"));
 
-    @Override
-    protected void createComponents() {
-        txtNomeCliente = ComponentFactoryAgenda.textField(getModel("cliente"));
-        dataNascimentoCliente = ComponentFactoryAgenda.dateField(getModel("datanascimento"));
-        txtcpfCliente = ComponentFactoryAgenda.textField(getModel("cpf"));
-        txttelefoneCliente = ComponentFactoryAgenda.textField(getModel("telefone"));
-        
-        btnAdicionar = ComponentFactoryAgenda.button("Adicionar");
-        btnEditar = ComponentFactoryAgenda.button("Editar/Salvar");
-        btnExcluir = ComponentFactoryAgenda.button("Excluir");
+		btnAdicionar = ComponentFactoryAgenda.button("Adicionar");
+		btnEditar = ComponentFactoryAgenda.button("Editar/Salvar");
+		btnExcluir = ComponentFactoryAgenda.button("Excluir");
 
-        tabelaServicos = new JTable(new ClienteTableModel());
-        tabelaServicos.setFont(new Font("Arial", Font.PLAIN, 15));
-        tabelaServicos.setBackground(Color.LIGHT_GRAY);
-        tabelaServicos.setRowHeight(35);
-        tabelaServicos.setDefaultEditor(Object.class, null);
-        tabelaServicos.setColumnSelectionAllowed(false);
-        tabelaServicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        tabelaServicos.setFocusable(false);
+		tabelaServicos = new JTable(new ClienteTableModel());
+		tabelaServicos.setFont(new Font("Arial", Font.PLAIN, 15));
+		tabelaServicos.setBackground(Color.LIGHT_GRAY);
+		tabelaServicos.setRowHeight(35);
+		tabelaServicos.setDefaultEditor(Object.class, null);
+		tabelaServicos.setColumnSelectionAllowed(false);
+		tabelaServicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tabelaServicos.setFocusable(false);
 
-        addActionListeners();
-    }
+		addActionListeners();
+	}
 
-    @Override
-    protected JPanel createMainPanel() {
-        FormLayout layout = new FormLayout(
-        		"pref, 9px, 100dlu:grow, 9px, pref, 9px, 100dlu:grow, 9px, pref, 9px, 100dlu:grow, 9px, pref, 10px, 100dlu:grow",
-        		" pref ,11px, pref, 5px, pref");
-        FormBuilder builder = FormBuilder.create().debug(true).layout(layout);
-        
-        builder.addLabel("Nome:").xy(1, 1);
-        builder.add(txtNomeCliente).xy(3, 1);
+	@Override
+	// Cria o painel layout e o painel
+	protected JPanel createMainPanel() {
+		FormLayout layout = new FormLayout(
+				"pref, 9px, 100dlu:grow, 9px, pref, 9px, 100dlu:grow, 9px, pref, 9px, 100dlu:grow, 9px, pref, 10px, 100dlu:grow",
+				" pref ,5px, pref, 5px, pref");
+		FormBuilder builder = FormBuilder.create().debug(true).layout(layout);
 
-        builder.addLabel("CPF:").xy(5, 1);
-        builder.add(txtcpfCliente).xy(7, 1);
+		builder.addLabel("Nome:").xy(1, 1);
+		builder.add(txtNomeCliente).xy(3, 1);
 
-        builder.addLabel("Data nascimento:").xy(9, 1);
-        builder.add(dataNascimentoCliente).xy(11, 1);
+		builder.addLabel("CPF:").xy(5, 1);
+		builder.add(txtcpfCliente).xy(7, 1);
 
-        builder.addLabel("Telefone:").xy(13, 1);
-        builder.add(txttelefoneCliente).xy(15, 1);
+		builder.addLabel("Data nascimento:").xy(9, 1);
+		builder.add(dataNascimentoCliente).xy(11, 1);
 
-        builder.add(tabelaServicos).xyw(1, 3, 15);
-        builder.add(createPanelButton()).xyw(1, 5, 15);
+		builder.addLabel("Telefone:").xy(13, 1);
+		builder.add(txttelefoneCliente).xy(15, 1);
 
-        return builder.build();
-    }
-    
-    private JPanel createPanelButton() {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        panel.add(btnAdicionar);
-        panel.add(btnEditar);
-        panel.add(btnExcluir);
-        return panel;
-    }
+		builder.add(tabelaServicos).xyw(1, 3, 15);
+		builder.add(createPanelButton()).xyw(1, 5, 15);
 
-    private void addActionListeners() {
-        btnAdicionar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
+		return builder.build(); // Constrói e retorna o painel
+	}
 
-        btnEditar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
+	// Função que cria um painel para melhor centralizar os botões
+	private JPanel createPanelButton() {
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
+		panel.add(btnAdicionar);
+		panel.add(btnEditar);
+		panel.add(btnExcluir);
+		return panel;
+	}
 
-        btnExcluir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-    }
+	// Adiciona os listeners aos botões
+	private void addActionListeners() {
+		btnAdicionar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (txtNomeCliente.getText().isEmpty() || txtcpfCliente.getText().isEmpty()
+						|| txttelefoneCliente.getText().isEmpty()) {
+					return;
+				} else {
 
-    @Override
-    protected String getPanelName() {
-        return "Cliente";
-    }
+				}
+
+			}
+		});
+
+		btnEditar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+		btnExcluir.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+	}
+
+	@Override
+	// Define o nome do painel
+	protected String getPanelName() {
+		return "Cliente";
+	}
 }

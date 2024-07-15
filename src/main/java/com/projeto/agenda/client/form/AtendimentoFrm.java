@@ -22,110 +22,113 @@ import com.projeto.agenda.server.domain.Atendimento;
 import com.toedter.calendar.JDateChooser;
 
 public class AtendimentoFrm extends BaseForm<Atendimento> {
-    private static final long serialVersionUID = 1L;
-    private JTable tabelaServicos;
-    JDateChooser dtNovo;
-    JTextField txtNome;
-    private HourPickerField horaInicio;
-    private HourPickerField horaFim;
-    private JButton btnAdicionar;
+	private static final long serialVersionUID = 1L;
+	private JTable tabelaServicos;
+	JDateChooser dtNovo;
+	JTextField txtNome;
+	private HourPickerField horaInicio;
+	private HourPickerField horaFim;
+	private JButton btnAdicionar;
 	private JButton btnEditar;
 	private JButton btnExcluir;
-    
-    public AtendimentoFrm() {
-    
-    }
 
-    @Override
-    protected void createComponents() {
-    	txtNome = ComponentFactoryAgenda.textField(getModel("cliente"));
-    	horaInicio = ComponentFactoryAgenda.hourPickerField(getModel("horarioInicio"));
-    	horaFim = ComponentFactoryAgenda.hourPickerField(getModel("horarioFim"));
-	
-        dtNovo = ComponentFactoryAgenda.dateField(getModel("data"));
-        
 
-        tabelaServicos = new JTable(new AtendimentoTableModel());
+
+	@Override
+	// Função para criar os componentes da interface
+	protected void createComponents() {
+		txtNome = ComponentFactoryAgenda.textField(getModel("cliente"));
+		horaInicio = ComponentFactoryAgenda.hourPickerField(getModel("horarioInicio"));
+		horaFim = ComponentFactoryAgenda.hourPickerField(getModel("horarioFim"));
+
+		dtNovo = ComponentFactoryAgenda.dateField(getModel("data"));
+
+		tabelaServicos = new JTable(new AtendimentoTableModel());
 		tabelaServicos.setFont(new Font("Arial", Font.PLAIN, 15));
-		tabelaServicos.setBackground(Color.LIGHT_GRAY);
+		tabelaServicos.setBackground(Color.black);
 		tabelaServicos.setRowHeight(35);
 		tabelaServicos.setDefaultEditor(Object.class, null);
 		tabelaServicos.setColumnSelectionAllowed(false);
 		tabelaServicos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tabelaServicos.setFocusable(false);
-		
+
 		btnAdicionar = ComponentFactoryAgenda.button("Adicionar");
 		btnEditar = ComponentFactoryAgenda.button("Editar/Salvar");
 		btnExcluir = ComponentFactoryAgenda.button("Excluir");
-		
 
 		addActionListeners();
-		
-    }
 
-    @Override
-    protected JPanel createMainPanel() {
-        FormLayout layout = new FormLayout(
-        		"pref, 5px, 100dlu:grow, 5px, pref, 5px, 100dlu:grow, 5px, pref, 5px, 100dlu:grow, 5px, pref, 5px, 100dlu:grow",
-        		"pref, 5px, pref, 5px, pref");
-        FormBuilder builder = FormBuilder.create().debug(true).layout(layout);
-        
-        
+	}
 
-        builder.addLabel("Cliente:").xy(1,1);
-        builder.add(txtNome).xy(3,1);
-        
-        builder.addLabel("Data consulta:").xy(5,1);
-        builder.add(dtNovo).xy(7,1);
+	@Override
+	// Cria o painel layout e o painel
+	protected JPanel createMainPanel() {
+		FormLayout layout = new FormLayout(
+				"pref, 5px, 100dlu:grow, 5px, pref, 5px, 100dlu:grow, 5px, pref, 5px, 100dlu:grow, 5px, pref, 5px, 100dlu:grow",
+				"pref, 5px, pref, 5px, pref");
+		FormBuilder builder = FormBuilder.create().debug(true).layout(layout);
 
-        builder.addLabel("Hora Inicio:").xy(9,1);
-        builder.add(horaInicio).xy(11, 1);
-        
-        builder.addLabel("Hora Fim:").xy(13,1);
-        builder.add(horaFim).xy(15, 1);
-        
-        builder.add(tabelaServicos).xyw(1, 3, 15);
-        builder.add(createPanelButton()).xyw(1, 5, 15);
-        
-       
-        
+		builder.addLabel("Cliente:").xy(1, 1);
+		builder.add(txtNome).xy(3, 1);
 
-        return builder.build();
-    }
-    private JPanel createPanelButton() {
-		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10,5));
+		builder.addLabel("Data consulta:").xy(5, 1);
+		builder.add(dtNovo).xy(7, 1);
+
+		builder.addLabel("Hora Inicio:").xy(9, 1);
+		builder.add(horaInicio).xy(11, 1);
+
+		builder.addLabel("Hora Fim:").xy(13, 1);
+		builder.add(horaFim).xy(15, 1);
+
+		builder.add(tabelaServicos).xyw(1, 3, 15);
+		builder.add(createPanelButton()).xyw(1, 5, 15);
+
+		return builder.build();// Constrói e retorna o painel
+	}
+
+	// Função que cria um painel para melhor centralizar os botões
+	private JPanel createPanelButton() {
+		JPanel panel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
 		panel.add(btnAdicionar);
 		panel.add(btnEditar);
 		panel.add(btnExcluir);
-		
-		
+
 		return panel;
 	}
-    private void addActionListeners() {
-        btnAdicionar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
 
-        btnEditar.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
+	// Adiciona os listeners aos botões
+	private void addActionListeners() {
+		btnAdicionar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (txtNome.getText().isEmpty() || dtNovo.getDate() == null) {
+					System.out.println("Valores Invalidos");
+					return;
+				} else {
+					// coloca os valores dentro do DB
+				}
 
-        btnExcluir.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                
-            }
-        });
-    }
+			}
+		});
 
-    @Override
-    protected String getPanelName() {
-        return "Atendimento";
-    }
+		btnEditar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+
+		btnExcluir.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+			}
+		});
+	}
+
+	@Override
+	//Define o nome do painel
+	protected String getPanelName() {
+		return "Atendimento";
+	}
 }

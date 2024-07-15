@@ -7,20 +7,19 @@ public class mainFrm extends JFrame {
     private static final long serialVersionUID = 1L;
 
     public mainFrm() {
-        setTitle("Aplicação com Abas");
+        setTitle("AtendPlus");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setLocation(0,0);
         
         AtendimentoFrm tela = new AtendimentoFrm();
         NovoFrm novo = new NovoFrm();
-        //EditarFrm editar = new EditarFrm();
         
         
         JTabbedPane pane = new JTabbedPane();
         pane.addTab(tela.getPanelName(), tela);
         pane.addTab(novo.getPanelName(), novo);
-        //pane.addTab(editar.getPanelName(), editar);
+        
         
         getContentPane().add(pane);
         pack();
