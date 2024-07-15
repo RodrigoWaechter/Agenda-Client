@@ -100,6 +100,7 @@ public class ComponentFactoryAgenda {
 	private static JDateChooser createDateField(ValueModel valueModel, boolean enabled, String formatter) {
 		JDateChooser dateChooser = new JDateChooser();
 		dateChooser.setDateFormatString(formatter);
+		
 		return dateChooser;
 	}
 	  public static <E extends Enum<E>> JComboBox<E> enumComboBox(ValueModel model, Class<E> enumClass) {
