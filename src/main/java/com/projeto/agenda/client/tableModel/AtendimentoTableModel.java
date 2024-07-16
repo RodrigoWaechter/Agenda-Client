@@ -2,33 +2,34 @@ package com.projeto.agenda.client.tableModel;
 
 import com.jgoodies.binding.list.SelectionInList;
 import com.projeto.agenda.components.AbstractListTableAdapter;
-import com.projeto.agenda.server.domain.Cliente;
+import com.projeto.agenda.server.domain.Atendimento;
+
 
 @SuppressWarnings("serial")
-public class AtendimentoTableModel extends AbstractListTableAdapter<Cliente> {
+public class AtendimentoTableModel extends AbstractListTableAdapter<Atendimento> {
 
     public AtendimentoTableModel() {
         this(new SelectionInList<>());
     }
 
-    public AtendimentoTableModel(SelectionInList<Cliente> selectionInList) {
+    public AtendimentoTableModel(SelectionInList<Atendimento> selectionInList) {
         super(selectionInList, new String[] {"Cliente", "Data", "Hora Inicio", "Hora Fim" });
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Cliente bean = (Cliente) getRow(rowIndex);
+        Atendimento bean = (Atendimento) getRow(rowIndex);
         switch (columnIndex) {
             case 0:
-                return bean.getIdCliente();
+                return bean.getIdAtendimento();
             case 1:
-                return bean.getNomeCliente();
+                return bean.getServico();
             case 2:
-                return bean.getNascimentoCliente();
+                return bean.getCliente();
             case 3:
-                return bean.getCpfCliente();
+                return bean.getHorarioInicio();
             case 4:
-                return bean.getTelefoneCliente();
+                return bean.getHorarioFim();
             default:
                 return null;
         }
