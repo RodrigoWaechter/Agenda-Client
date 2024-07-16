@@ -3,7 +3,15 @@ package com.projeto.agenda.client.form;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -11,6 +19,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jgoodies.forms.builder.FormBuilder;
 import com.projeto.agenda.client.tableModel.ClienteTableModel;
 import com.projeto.agenda.components.BaseForm;
@@ -30,7 +42,7 @@ public class ClienteFrm extends BaseForm<Cliente> {
     private JButton btnEditar;
     private JButton btnExcluir;
     private ClienteTableModel tableModel;
-
+    private JButton btnPesquisar;
     public ClienteFrm() {
     }
 
@@ -44,8 +56,9 @@ public class ClienteFrm extends BaseForm<Cliente> {
         btnEditar = ComponentFactoryAgenda.button("Editar", actionEditar());
         btnExcluir = ComponentFactoryAgenda.button("Excluir", actionExcluir());
         tableModel = new ClienteTableModel();
-        initializeTableWithDummyClientes();
+       // initializeTableWithDummyClientes();
         table = ComponentFactoryAgenda.table(tableModel);
+        btnPesquisar = ComponentFactoryAgenda.button("Pesquisar", actionPesquisar());
 
         // Adicionar listener para preencher campos ao clicar em uma linha da tabela
         table.getSelectionModel().addListSelectionListener(e -> {
@@ -80,6 +93,8 @@ public class ClienteFrm extends BaseForm<Cliente> {
         panel.add(btnAdicionar);
         panel.add(btnEditar);
         panel.add(btnExcluir);
+        panel.add(btnPesquisar);
+
         return panel;
     }
 
@@ -93,11 +108,73 @@ public class ClienteFrm extends BaseForm<Cliente> {
                 cliente.setCpfCliente(txtcpfCliente.getText());
                 cliente.setTelefoneCliente(txttelefoneCliente.getText());
                 tableModel.addCliente(cliente);
+                
+                try {
+                    URL url = new URL("http://localhost:8081/Cliente/save"); 
+                    HttpURLConnection con = (HttpURLConnection) url.openConnection();
+                    con.setRequestMethod("POST");
+                    con.setRequestProperty("Content-Type", "application/json");
+                    con.setDoOutput(true);
+
+                    ObjectMapper mapper = new ObjectMapper();
+                    String jsonInputString = mapper.writeValueAsString(cliente);
+
+                    try (OutputStream os = con.getOutputStream()) {
+                        byte[] input = jsonInputString.getBytes("utf-8");
+                        os.write(input, 0, input.length);
+                    }
+
+                    int responseCode = con.getResponseCode();
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        System.out.println("Cliente saved successfully.");
+                    } else {
+                        System.out.println("Failed to save Cliente. Response Code: " + responseCode);
+                    }
+                } catch (MalformedURLException ex) {
+                    ex.printStackTrace();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                
                 clearFormFields();
             }
         };
     }
+    private ActionListener actionPesquisar() {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                List<Cliente> clientes = findClientes();
+               
+                updateTable(clientes);
+            }
+        };
+    }
 
+    private List<Cliente> findClientes() {
+    	 String baseUrl = "http://localhost:8081"; 
+    	    String findAllUrl = baseUrl + "/Cliente/findAll";
+
+    	    RestTemplate restTemplate = new RestTemplate();
+    	    ResponseEntity<Cliente[]> response = restTemplate.getForEntity(findAllUrl, Cliente[].class);
+
+    	    if (response.getStatusCode().is2xxSuccessful()) {
+    	        return Arrays.asList(response.getBody());
+    	    } else {
+    	        System.out.println("Failed to fetch clientes. Response Code: " + response.getStatusCodeValue());
+    	        return Collections.emptyList();
+    	    }
+    }
+
+    private void updateTable(List<Cliente> clientes) {
+        // Limpar o tableModel atual
+        tableModel.getClientes().clear();
+
+        // Adicionar os clientes obtidos ao tableModel
+        for (Cliente cliente : clientes) {
+            tableModel.addCliente(cliente);
+        }
+    }
     private ActionListener actionEditar() {
         return new ActionListener() {
             @Override
